@@ -663,3 +663,7 @@ if TEXTUAL_AVAILABLE:
 
         def action_quit(self) -> None:
             self.exit()
+
+
+if __name__ == "__main__":
+    sys.exit(main())
