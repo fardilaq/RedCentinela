@@ -60,7 +60,7 @@ def evaluation_function(state: GameState) -> float:
     
     terminales_score = -20*len(pending_terminals)
     
-    accion_score = -5*len(actions)
+    accion_score = 5*len(actions)
     
     eval = score + defensor_score + dist_to_goal_score + terminales_score + accion_score
 
