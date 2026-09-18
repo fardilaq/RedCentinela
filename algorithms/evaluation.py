@@ -59,10 +59,8 @@ def evaluation_function(state: GameState) -> float:
     dist_to_goal_score = -10*min_dist_to_goal
     
     terminales_score = -20*len(pending_terminals)
-    
-    accion_score = 5*len(actions)
-    
-    eval = score + defensor_score + dist_to_goal_score + terminales_score + accion_score
+        
+    eval = score + defensor_score + dist_to_goal_score + terminales_score 
 
     if eval > 999.0:
       return 990.0
