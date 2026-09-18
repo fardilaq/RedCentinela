@@ -38,5 +38,35 @@ def evaluation_function(state: GameState) -> float:
     if state.is_win() or state.is_lose():
         return base_evaluation_function(state)
 
-    # TODO: Add your code here
-    return base_evaluation_function(state)
+    def_pos = state.defender_position
+    intruder_pos = state.intruder_position
+    pending_terminals = state.pending_terminals
+    score = state.get_score()
+    actions = state.get_legal_actions(0)
+            
+    dist_def_to_intruder = state.layout.distance(def_pos, intruder_pos)
+    
+    defensor_score = 10*dist_def_to_intruder
+
+    min_dist_to_goal = float('inf')
+
+    if pending_terminals:
+      for terminal in pending_terminals:
+        dis = state.layout.distance(def_pos, terminal)
+        if dis < min_dist_to_goal:
+          min_dist_to_goal = dis
+    
+    dist_to_goal_score = -10*min_dist_to_goal
+    
+    terminales_score = -20*len(pending_terminals)
+    
+    accion_score = -5*len(actions)
+    
+    eval = score + defensor_score + dist_to_goal_score + terminales_score + accion_score
+
+    if eval > 999.0:
+      return 990.0
+    if eval < -999.0:
+      return -999.0
+
+    return float(eval)
